@@ -2,16 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class PPKN extends StatefulWidget {
-  const PPKN({super.key});
+class Ppkn extends StatefulWidget {
+  const Ppkn({super.key});
 
   @override
-  State<PPKN> createState() => _PPKNState();
+  State<Ppkn> createState() => _PpknState();
 }
 
-class _PPKNState extends State<PPKN> {
+class _PpknState extends State<Ppkn> {
   final PdfViewerController _pdfViewerController = PdfViewerController();
-  final String eBooks = "ppkn.pdf";
+  // final String eBooks =
+  //     "https://drive.google.com/uc?export=download&id=1d03ZpFfGC-tfRxBZHSUbpi31MoMsQvr9";
+  final String eBookAsset = "assets/buku/ppkn.pdf";
 
   @override
   void initState() {
@@ -19,11 +21,11 @@ class _PPKNState extends State<PPKN> {
     _pdfViewerController.addListener(() async {
       int currentPage = _pdfViewerController.pageNumber;
       final prefs = await SharedPreferences.getInstance();
-      await prefs.setInt('$eBooks-lastPage', currentPage);
+      await prefs.setInt('$eBookAsset-lastPage', currentPage);
     });
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       final prefs = await SharedPreferences.getInstance();
-      int lastPage = prefs.getInt('$eBooks-lastPage') ?? 1;
+      int lastPage = prefs.getInt('$eBookAsset-lastPage') ?? 1;
       _pdfViewerController.jumpToPage(lastPage);
     });
   }
@@ -36,7 +38,8 @@ class _PPKNState extends State<PPKN> {
         title: const Text("PPKN"),
       ),
       body: SfPdfViewer.asset(
-        "assets/buku/$eBooks",
+        // Menggunakan SfPdfViewer.network
+        eBookAsset,
         controller: _pdfViewerController,
       ),
       floatingActionButton: FloatingActionButton(
@@ -54,7 +57,7 @@ class _PPKNState extends State<PPKN> {
   Future<void> _saveCurrentPage() async {
     int currentPage = _pdfViewerController.pageNumber;
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setInt('$eBooks-lastPage', currentPage);
+    await prefs.setInt('$eBookAsset-lastPage', currentPage);
     if (mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(

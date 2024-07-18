@@ -1,11 +1,11 @@
-import 'package:flutter/material.dart';
-import 'package:ebook/buku_pelajaran/bahasa_arab.dart';
-import 'package:ebook/buku_pelajaran/bahasa_indonesia.dart';
-import 'package:ebook/buku_pelajaran/bahasa_inggris.dart';
+import 'package:ebook/buku_pelajaran/b_in.dart';
 import 'package:ebook/buku_pelajaran/ipa.dart';
 import 'package:ebook/buku_pelajaran/ips.dart';
-import 'package:ebook/buku_pelajaran/matematika.dart';
+import 'package:ebook/buku_pelajaran/mtk.dart';
 import 'package:ebook/buku_pelajaran/ppkn.dart';
+import 'package:flutter/material.dart';
+import 'package:ebook/buku_pelajaran/b_ar.dart';
+import 'package:ebook/buku_pelajaran/b_ing.dart';
 import 'package:ebook/items/details.dart';
 import 'package:ebook/items/videos.dart';
 import 'package:logger/logger.dart';
@@ -19,7 +19,7 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('E-BOOK SISWA'),
+        title: const Text('e-Book Siswa'),
         leading: Transform.rotate(
           angle: -25 * 3.141592653589793238 / 180,
           child: Image.asset('assets/logo.png', width: 20),
@@ -30,78 +30,54 @@ class Home extends StatelessWidget {
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
             colors: [
               Color.fromARGB(255, 27, 228, 255),
               Color.fromARGB(255, 193, 255, 250)
             ],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
           ),
         ),
         child: GridView.count(
           crossAxisCount: 2,
           children: <Widget>[
             _buildBookItem(
-              title: 'BAHASA INDONESIA',
-              author: 'Titik Harsiati.',
-              coverImage: 'assets/cover/bahasa indonesia.png',
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const BahasaIndonesia()),
-                );
-              },
-            ),
-            _buildBookItem(
-              title: 'BAHASA INGGRIS',
-              author: 'Siti Wachidah.',
-              coverImage: 'assets/cover/bahasa inggris.png',
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const BahasaInggris()),
-                );
-              },
-            ),
-            _buildBookItem(
               title: 'BAHASA ARAB',
-              author: 'Achmad Rasyid Ridha, M.PI',
-              coverImage: 'assets/cover/bahasa arab.png',
+              author: 'Achmad Rasyid Ridha, M.Pi',
+              coverImage: 'assets/cover/1.png',
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const BahasaArab()),
+                  MaterialPageRoute(builder: (context) => const Barab()),
                 );
               },
             ),
             _buildBookItem(
-              title: 'MATEMATIKA',
-              author: 'Tim Gakko Tosho',
-              coverImage: 'assets/cover/matematika.png',
+              title: 'BAHASA INDONESIA',
+              author: 'Titik Harsiati',
+              coverImage: 'assets/cover/2.png',
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const Matematika()),
+                  MaterialPageRoute(builder: (context) => const Bind()),
                 );
               },
             ),
             _buildBookItem(
-              title: 'PPKN',
-              author: 'Lukman Surya',
-              coverImage: 'assets/cover/ppkn.png',
+              title: 'BAHASA IINGGRIS',
+              author: 'Siti Wachidah',
+              coverImage: 'assets/cover/3.png',
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const PPKN()),
+                  MaterialPageRoute(builder: (context) => const Bing()),
                 );
               },
             ),
             _buildBookItem(
               title: 'IPA',
-              author: 'Wasis',
-              coverImage: 'assets/cover/ipa.png',
+              author: 'Victoriani Inabuy, dkk.',
+              coverImage: 'assets/cover/4.png',
               onTap: () {
                 Navigator.push(
                   context,
@@ -111,8 +87,8 @@ class Home extends StatelessWidget {
             ),
             _buildBookItem(
               title: 'IPS',
-              author: 'Wasis',
-              coverImage: 'assets/cover/ips.png',
+              author: 'Ahmad Mushlih',
+              coverImage: 'assets/cover/5.png',
               onTap: () {
                 Navigator.push(
                   context,
@@ -120,11 +96,33 @@ class Home extends StatelessWidget {
                 );
               },
             ),
+            _buildBookItem(
+              title: 'MATEMATIKA',
+              author: 'Abdur Rahman As’ari',
+              coverImage: 'assets/cover/6.png',
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const Mtk()),
+                );
+              },
+            ),
+            _buildBookItem(
+              title: 'PPKN',
+              author: ' Lukman Surya Saputra',
+              coverImage: 'assets/cover/7.png',
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const Ppkn()),
+                );
+              },
+            ),
           ],
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.lightBlue,
+        backgroundColor: Colors.blue,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.menu_book_outlined),
@@ -171,7 +169,7 @@ class Home extends StatelessWidget {
       child: Card(
         elevation: 10,
         shadowColor: Colors.black,
-        color: Colors.lightBlue,
+        color: Colors.blue,
         margin: const EdgeInsets.all(8),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,

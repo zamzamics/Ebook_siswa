@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
-        android:label="E-BOOK SISWA"
+        android:label="e-Book Siswa"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

@@ -11,7 +11,9 @@ class Ips extends StatefulWidget {
 
 class _IpsState extends State<Ips> {
   final PdfViewerController _pdfViewerController = PdfViewerController();
-  final String eBooks = "ips.pdf";
+  // final String eBooks =
+  //     "https://drive.google.com/uc?export=download&id=1d03ZpFfGC-tfRxBZHSUbpi31MoMsQvr9";
+  final String eBookAsset = "assets/buku/ips.pdf";
 
   @override
   void initState() {
@@ -19,11 +21,11 @@ class _IpsState extends State<Ips> {
     _pdfViewerController.addListener(() async {
       int currentPage = _pdfViewerController.pageNumber;
       final prefs = await SharedPreferences.getInstance();
-      await prefs.setInt('$eBooks-lastPage', currentPage);
+      await prefs.setInt('$eBookAsset-lastPage', currentPage);
     });
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       final prefs = await SharedPreferences.getInstance();
-      int lastPage = prefs.getInt('$eBooks-lastPage') ?? 1;
+      int lastPage = prefs.getInt('$eBookAsset-lastPage') ?? 1;
       _pdfViewerController.jumpToPage(lastPage);
     });
   }
@@ -33,10 +35,11 @@ class _IpsState extends State<Ips> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text("Ilmu Pengetahuan Sosial"),
+        title: const Text("ILMU PENGETAHUAN SOSIAL"),
       ),
       body: SfPdfViewer.asset(
-        "assets/buku/$eBooks",
+        // Menggunakan SfPdfViewer.network
+        eBookAsset,
         controller: _pdfViewerController,
       ),
       floatingActionButton: FloatingActionButton(
@@ -54,7 +57,7 @@ class _IpsState extends State<Ips> {
   Future<void> _saveCurrentPage() async {
     int currentPage = _pdfViewerController.pageNumber;
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setInt('$eBooks-lastPage', currentPage);
+    await prefs.setInt('$eBookAsset-lastPage', currentPage);
     if (mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
